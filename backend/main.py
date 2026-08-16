@@ -3,7 +3,11 @@ from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 import json
 import random
+import os
+from dotenv import load_dotenv
 from utils.api_key_rotator import key_rotator
+
+load_dotenv()
 
 app = FastAPI(title="Xhubxhack AI Professor")
 app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
@@ -39,7 +43,9 @@ async def websocket_endpoint(websocket: WebSocket):
             data = await websocket.receive_text()
             print(f"Data MT5: {data}")
     except WebSocketDisconnect:
-        pass
+        print("Client disconnected")
+    except Exception as e:
+        print(f"WebSocket error: {e}")
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
