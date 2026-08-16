@@ -1,1 +1,1 @@
-export default { plugins: { tailwindcss: {}, autoprefixer: {} } }
+# This file has been moved to frontend/postcss.config.js
