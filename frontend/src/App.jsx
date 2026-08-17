@@ -7,7 +7,7 @@ ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, T
 
 // Backend base URL (updated to Cloudflare URL)
 const BACKEND_BASE = 'https://aluminum-horses-element-keith.trycloudflare.com';
-const WS_BASE = 'wss://aluminum-horses-element-keith.trycloudflare.com';
+const WS_BASE = 'wss://aluminum-horses-element-keith.trycloudflare.com/ws';
 
 export default function App() {
   const [signal, setSignal] = useState(null);
