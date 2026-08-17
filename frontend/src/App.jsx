@@ -5,9 +5,10 @@ import { useWebSocket } from './hooks/useWebSocket';
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
-// Backend base URL (updated to Cloudflare URL)
-const BACKEND_BASE = 'https://aluminum-horses-element-keith.trycloudflare.com';
-const WS_BASE = 'wss://aluminum-horses-element-keith.trycloudflare.com';
+// Backend base URL (use Vite env var when available, fallback to provided Cloudflare URL)
+const BACKEND_BASE = import.meta.env.VITE_BACKEND_URL || 'https://aluminum-horses-element-keith.trycloudflare.com';
+// WebSocket base: allow explicit VITE_BACKEND_WS or derive from BACKEND_BASE
+const WS_BASE = import.meta.env.VITE_BACKEND_WS || BACKEND_BASE.replace(/^http/, 'ws');
 
 export default function App() {
   const [signal, setSignal] = useState(null);
