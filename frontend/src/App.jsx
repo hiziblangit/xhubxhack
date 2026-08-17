@@ -5,17 +5,21 @@ import { useWebSocket } from './hooks/useWebSocket';
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
+// Backend base URL (updated to Cloudflare URL)
+const BACKEND_BASE = 'https://aluminum-horses-element-keith.trycloudflare.com';
+const WS_BASE = 'wss://aluminum-horses-element-keith.trycloudflare.com';
+
 export default function App() {
   const [signal, setSignal] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const { lastMessage } = useWebSocket('ws://localhost:8000/ws');
+  const { lastMessage } = useWebSocket(`${WS_BASE}/ws`);
 
   useEffect(() => {
     const fetchSignal = async () => {
       try {
         setLoading(true);
-        const response = await fetch('http://localhost:8000/api/analyze', {
+        const response = await fetch(`${BACKEND_BASE}/api/analyze`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ rsi: 65, atr: 25 })
